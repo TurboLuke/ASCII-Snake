@@ -31,7 +31,7 @@ void gamepad::draw() {
             std::cout << " - ";
         } else {
             if(m_snake->contains(i)) {
-                std::cout << " S ";
+                std::cout << " # ";
             } else if(i == m_apple_pos) {
                 std::cout << " O ";
             } else {
