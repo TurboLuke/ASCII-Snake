@@ -1,12 +1,9 @@
 #pragma once
-
 #include <stdlib.h>
 #include <conio.h>
 #include <windows.h>
-
 #include "gamepad.h"
 #include "snake.h"
-
 
 class game {
 private:
@@ -15,6 +12,7 @@ private:
 
 public:
     game();
+    explicit game(int gamepad_size);
     ~game();
 
     void start();

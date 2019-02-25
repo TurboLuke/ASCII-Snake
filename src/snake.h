@@ -1,5 +1,4 @@
 #pragma once
-
 #include <stdlib.h>
 #include <iostream>
 #include <vector>
@@ -9,6 +8,7 @@ private:
     int m_snake_len;
     std::vector<int> *m_body_pos;
     void move_rem_parts(int head_pos);
+
 public:
     snake();
     ~snake();
@@ -24,6 +24,9 @@ public:
     void right();
     void down(int gpad_len);
     void left();
+
+    //snake collision detection
+    bool bitten(int new_pos);
 };
 
 

@@ -2,7 +2,7 @@
 
 snake::snake() {
     m_snake_len = 1;
-    m_body_pos = new std::vector<int>(10);
+    m_body_pos = new std::vector<int>(m_snake_len);
 }
 
 snake::~snake() {
@@ -11,14 +11,15 @@ snake::~snake() {
 
 void snake::grow() {
     m_snake_len++;
+    m_body_pos->resize(m_snake_len);
 }
 
 //setter
 void snake::set_pos(int pos) {
     for (int i = 0; i < m_snake_len; ++i) {
         m_body_pos->at(i) = pos + i;
-        std::cout << "i: " << i << ", pos: " << pos << std::endl;
-        std::cout << "snake len: " << m_snake_len << std::endl;
+        //std::cout << "i: " << i << ", pos: " << pos << std::endl;
+        //std::cout << "snake len: " << m_snake_len << std::endl;
     }
 }
 
@@ -76,10 +77,17 @@ void snake::move_rem_parts(int head_pos) {
         m_body_pos->at(i) = head_pos;
         head_pos = temp;
 
-        std::cout << "i: " << i << ", pos: " << m_body_pos->at(i) << std::endl;
-        std::cout << "snake len: " << m_snake_len << std::endl;
+        //std::cout << "i: " << i << ", pos: " << m_body_pos->at(i) << std::endl;
+        //std::cout << "snake len: " << m_snake_len << std::endl;
     }
 }
 
+bool snake::bitten(int new_pos) {
 
-
+    for (int i = 1; i < m_snake_len; ++i) {
+        if(new_pos == m_body_pos->at(i)) {
+            return true;
+        }
+    }
+    return false;
+}
