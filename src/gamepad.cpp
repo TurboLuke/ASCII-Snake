@@ -12,6 +12,12 @@ gamepad::gamepad(int size) {
 
     //apple
     m_apple_pos = rand() % m_gamepad_size + 1;
+    while(collision(m_apple_pos, 0)) {
+        m_apple_pos = rand() % m_gamepad_size + 1;
+    }
+
+    //score
+    m_score = 0;
 }
 
 gamepad::~gamepad() {
@@ -19,8 +25,10 @@ gamepad::~gamepad() {
 }
 
 void gamepad::draw() {
+
+    //experimental refresher
     for (int j = 0; j < 10; ++j) {
-        std::cout << "\n\n\n\n";
+        std::cout << "\n\n\n";
     }
 
     for (int i = 0; i < m_gamepad_size; ++i) {
@@ -48,16 +56,16 @@ void gamepad::draw() {
 void gamepad::move_snake(int direction, bool & gameover) {
     if(!collision(m_snake->get_pos(), direction)) {
         switch (direction) {
-            case 1: //up
+            case UP:
                 m_snake->up(m_gamepad_len);
                 break;
-            case 2: //right
+            case RIGHT:
                 m_snake->right();
                 break;
-            case 3: //down
+            case DOWN:
                 m_snake->down(m_gamepad_len);
                 break;
-            case 4: //left
+            case LEFT:
                 m_snake->left();
                 break;
         }
@@ -68,11 +76,10 @@ void gamepad::move_snake(int direction, bool & gameover) {
     if(m_snake->get_pos() == m_apple_pos) {
         m_apple_pos = rand() % m_gamepad_size + 1;
 
-        //generate new apple pos as long as the rand apple pos is invalid
         while(collision(m_apple_pos, 0)) {
             m_apple_pos = rand() % m_gamepad_size + 1;
         }
-        //std::cout << "apple_pos: " << m_apple_pos;
+        m_score += 10;
         m_snake->grow();
     }
 }
@@ -80,16 +87,16 @@ void gamepad::move_snake(int direction, bool & gameover) {
 bool gamepad::collision(int curr_pos, int direction) {
     int new_pos = 0;
     switch (direction) {
-        case 1: //up
+        case UP:
             new_pos = curr_pos - m_gamepad_len;
             break;
-        case 2: //right
+        case RIGHT:
             new_pos = curr_pos + 1;
             break;
-        case 3: //down
+        case DOWN:
             new_pos = curr_pos + m_gamepad_len;
             break;
-        case 4: //left
+        case LEFT:
             new_pos = curr_pos - 1;
             break;
         default: //apple collision detection
@@ -124,3 +131,8 @@ bool gamepad::collision(int curr_pos, int direction) {
     }
     return false;
 }
+
+size_t gamepad::get_score() {
+    return m_score;
+}
+

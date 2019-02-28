@@ -18,8 +18,6 @@ void snake::grow() {
 void snake::set_pos(int pos) {
     for (int i = 0; i < m_snake_len; ++i) {
         m_body_pos->at(i) = pos + i;
-        //std::cout << "i: " << i << ", pos: " << pos << std::endl;
-        //std::cout << "snake len: " << m_snake_len << std::endl;
     }
 }
 
@@ -76,9 +74,6 @@ void snake::move_rem_parts(int head_pos) {
         temp = m_body_pos->at(i);
         m_body_pos->at(i) = head_pos;
         head_pos = temp;
-
-        //std::cout << "i: " << i << ", pos: " << m_body_pos->at(i) << std::endl;
-        //std::cout << "snake len: " << m_snake_len << std::endl;
     }
 }
 
